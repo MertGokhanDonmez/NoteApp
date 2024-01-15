@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using NoteApp.Core.DataAccess;
+using NoteApp.DataAccess.Abstract;
 using NoteApp.Entities.Concrete;
 
 namespace NoteApp.DataAccess;
 
-public class EfUserDal : IGenericRepository<User>
+public class EfUserDal : IGenericRepository<User>, IUserDal
 {
     public void Add(User entity)
     {

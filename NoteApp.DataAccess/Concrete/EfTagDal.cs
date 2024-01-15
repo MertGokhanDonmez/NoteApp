@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using NoteApp.Core.DataAccess;
+using NoteApp.DataAccess.Abstract;
 using NoteApp.Entities.Concrete;
 
 namespace NoteApp.DataAccess;
 
-public class EfTagDal : IGenericRepository<Tag>
+public class EfTagDal : IGenericRepository<Tag>, ITagDal
 {
     public void Add(Tag entity)
     {

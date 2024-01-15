@@ -4,7 +4,7 @@ using NoteApp.Entities.Concrete;
 
 namespace NoteApp.Business.Concrete;
 
-public class NoteManager : IGenericService<Note>
+public class NoteManager : IGenericService<Note>, INoteService
 {
     INoteDal _noteDal;
     public NoteManager(INoteDal noteDal)

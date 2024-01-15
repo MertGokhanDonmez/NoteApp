@@ -3,7 +3,7 @@ using NoteApp.Entities.Concrete;
 
 namespace NoteApp.DataAccess.Abstract;
 
-public interface INoteDal : IGenericRepository<Note>
+public interface IUserDal : IGenericRepository<User>
 {
-    //custom methods for Note entity
+    //custom methods for User entity
 }

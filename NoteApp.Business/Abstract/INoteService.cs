@@ -1,6 +1,8 @@
-﻿namespace NoteApp.Business.Abstract;
+﻿using NoteApp.Entities.Concrete;
 
-public interface INoteService
+namespace NoteApp.Business.Abstract;
+
+public interface INoteService : IGenericService<Note>
 {
 
 }
