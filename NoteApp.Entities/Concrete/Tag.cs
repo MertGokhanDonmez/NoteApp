@@ -1,0 +1,12 @@
+﻿using NoteApp.Core.Entities;
+
+namespace NoteApp.Entities.Concrete;
+
+public class Tag : IEntity
+{
+    public int TagId { get; set; }
+    public string Name { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
+    public ICollection<Note> Notes { get; set; } = new List<Note>();
+}
