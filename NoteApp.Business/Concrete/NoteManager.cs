@@ -22,6 +22,11 @@ public class NoteManager : IGenericService<Note>, INoteService
         return _noteDal.GetAll();
     }
 
+    public List<Note> GetAllNotesByUserId(int id)
+    {
+        return _noteDal.GetAll(p => p.UserId == id);
+    }
+
     public Note GetById(int Id)
     {
         return _noteDal.GetById(p => p.NoteId == Id);
