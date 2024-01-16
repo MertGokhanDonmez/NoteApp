@@ -1,32 +1,38 @@
 ﻿using NoteApp.Business.Abstract;
+using NoteApp.DataAccess.Abstract;
 using NoteApp.Entities.Concrete;
 
-namespace NoteApp.Business;
+namespace NoteApp.Business.Concrete;
 
 public class UserManager : IGenericService<User>, IUserService
 {
+    IUserDal _userDal;
+    public UserManager(IUserDal userDal)
+    {
+        _userDal = userDal;
+    }
     public void Delete(User t)
     {
-        throw new NotImplementedException();
+        _userDal.Delete(t);
     }
 
     public List<User> GetAll()
     {
-        throw new NotImplementedException();
+        return _userDal.GetAll();
     }
 
     public User GetById(int Id)
     {
-        throw new NotImplementedException();
+        return _userDal.GetById(p => p.UserId == Id);
     }
 
     public void Insert(User t)
     {
-        throw new NotImplementedException();
+        _userDal.Add(t);
     }
 
     public void Update(User t)
     {
-        throw new NotImplementedException();
+        _userDal.Update(t);
     }
 }
