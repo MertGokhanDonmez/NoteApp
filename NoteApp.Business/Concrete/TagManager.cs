@@ -23,7 +23,7 @@ public class TagManager : IGenericService<Tag>, ITagService
 
     public Tag GetById(int Id)
     {
-        return _tagDal.GetById(p => p.TagId == Id);
+        return _tagDal.Get(p => p.TagId == Id);
     }
 
     public void Insert(Tag t)

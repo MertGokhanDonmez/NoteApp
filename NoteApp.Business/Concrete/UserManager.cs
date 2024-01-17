@@ -23,7 +23,7 @@ public class UserManager : IGenericService<User>, IUserService
 
     public User GetById(int Id)
     {
-        return _userDal.GetById(p => p.UserId == Id);
+        return _userDal.Get(p => p.UserId == Id);
     }
 
     public void Insert(User t)

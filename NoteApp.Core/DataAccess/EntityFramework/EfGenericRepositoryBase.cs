@@ -37,7 +37,7 @@ public class EfGenericRepositoryBase<TEntity, TContext> : IGenericRepository<TEn
         }
     }
 
-    public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+    public TEntity Get(Expression<Func<TEntity, bool>> filter)
     {
         using (TContext context = new TContext())
         {

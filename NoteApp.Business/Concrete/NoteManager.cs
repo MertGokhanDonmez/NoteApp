@@ -29,7 +29,7 @@ public class NoteManager : IGenericService<Note>, INoteService
 
     public Note GetById(int Id)
     {
-        return _noteDal.GetById(p => p.NoteId == Id);
+        return _noteDal.Get(p => p.NoteId == Id);
     }
 
     public void Insert(Note t)
