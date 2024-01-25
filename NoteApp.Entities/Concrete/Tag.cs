@@ -8,5 +8,5 @@ public class Tag : IEntity
     public string Name { get; set; }
     public int UserId { get; set; }
     public User User { get; set; }
-    public ICollection<Note> Notes { get; set; } = new List<Note>();
+    public ICollection<NoteTag> NoteTags { get; set; }
 }

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NoteApp.Business.Concrete;
 using NoteApp.DataAccess;
 using NoteApp.Entities.Concrete;
 
 namespace NoteApp.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[Controller]")]
 public class NoteController : ControllerBase
@@ -13,7 +15,7 @@ public class NoteController : ControllerBase
 
     public NoteController()
     {
-        
+
     }
 
     [HttpGet("{id}")]
@@ -26,8 +28,8 @@ public class NoteController : ControllerBase
             {
                 return Ok(result);
             }
-            else { return NotFound("No note was found with this id.");}
-            
+            else { return NotFound("No note was found with this id."); }
+
         }
         catch (System.Exception ex)
         {
@@ -35,7 +37,7 @@ public class NoteController : ControllerBase
             throw;
         }
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateNote([FromBody] Note note)
     {
@@ -76,7 +78,7 @@ public class NoteController : ControllerBase
             {
                 return Ok(result);
             }
-            else { return NotFound("No note was found with this id!");}
+            else { return NotFound("No note was found with this id!"); }
         }
         catch (System.Exception ex)
         {

@@ -10,5 +10,5 @@ public class Note : IEntity
     public string Content { get; set; }
     public int UserId { get; set; }
     public User User { get; set; }
-    public ICollection<Tag> Tags { get; set; } = new List<Tag>();
+    public ICollection<NoteTag> NoteTags { get; set; }
 }
