@@ -21,6 +21,11 @@ public class TagManager : IGenericService<Tag>, ITagService
         return _tagDal.GetAll();
     }
 
+    public List<Tag> GetAllTagsByUserId(int userId)
+    {
+        return _tagDal.GetAll(p => p.UserId == userId);
+    }
+
     public Tag GetById(int Id)
     {
         return _tagDal.Get(p => p.TagId == Id);

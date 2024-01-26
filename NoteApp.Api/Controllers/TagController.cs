@@ -1,34 +1,34 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using NoteApp.Api.Models;
 using NoteApp.Business.Concrete;
 using NoteApp.DataAccess;
 using NoteApp.Entities.Concrete;
 
-namespace NoteApp.Api.Controllers;
+namespace TagApp.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]s")]
-public class NoteController : ControllerBase
+public class TagController : ControllerBase
 {
-    NoteManager noteManager = new NoteManager(new EfNoteDal());
+    TagManager TagManager = new TagManager(new EfTagDal());
 
-    public NoteController()
+    public TagController()
     {
 
     }
 
-    [HttpGet("{noteId}")]
-    public async Task<IActionResult> GetNoteById(int noteId)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetTagById(int id)
     {
         try
         {
-            var result = noteManager.GetById(noteId);
+            var result = TagManager.GetById(id);
             if (result != null)
             {
                 return Ok(result);
             }
-            else { return NotFound("No note was found with this id."); }
+            else { return NotFound("No Tag was found with this id."); }
 
         }
         catch (System.Exception ex)
@@ -39,17 +39,16 @@ public class NoteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateNote([FromBody] NoteModel noteModel)
+    public async Task<IActionResult> CreateTag([FromBody] TagModel tagModel)
     {
         try
         {
-            Note createdTag = new Note
+            Tag createdTag = new Tag
             {
-                Title = noteModel.Title,
-                Content = noteModel.Content,
-                UserId = noteModel.UserId
+                Name = tagModel.Name,
+                UserId = tagModel.UserId
             };
-            noteManager.Insert(createdTag);
+            TagManager.Insert(createdTag);
             return Ok();
         }
         catch (System.Exception ex)
@@ -60,12 +59,12 @@ public class NoteController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteNote([FromBody] Note note)
+    public async Task<IActionResult> DeleteTag([FromBody] Tag Tag)
     {
         try
         {
-            noteManager.Delete(note);
-            return Ok($"Successfully deleted note with this id: {note.NoteId}");
+            TagManager.Delete(Tag);
+            return Ok($"Successfully deleted Tag with this id: {Tag.TagId}");
         }
         catch (System.Exception ex)
         {
@@ -75,16 +74,16 @@ public class NoteController : ControllerBase
     }
 
     [HttpGet("{id}/user")]
-    public async Task<IActionResult> GetAllNotesByUserId(int id)
+    public async Task<IActionResult> GetAllTagsByUserId(int id)
     {
         try
         {
-            var result = noteManager.GetAllNotesByUserId(id);
+            var result = TagManager.GetAllTagsByUserId(id);
             if (result != null)
             {
                 return Ok(result);
             }
-            else { return NotFound("No note was found with this id!"); }
+            else { return NotFound("No Tag was found with this id!"); }
         }
         catch (System.Exception ex)
         {

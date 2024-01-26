@@ -7,7 +7,7 @@ using NoteApp.Entities.Concrete;
 namespace NoteApp.Api.Controllers;
 
 [ApiController]
-[Route("api/[Controller]")]
+[Route("api/[Controller]s")]
 public class UserController : ControllerBase
 {
     UserManager userManager = new UserManager(new EfUserDal());

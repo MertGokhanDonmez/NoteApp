@@ -12,33 +12,33 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = config["wtSettings: Issuer"],
-        ValidAudience = config["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
-        ValidateIssuer = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true
-    };
-});
+// builder.Services.AddAuthentication(x =>
+// {
+//     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//     x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+// }).AddJwtBearer(x =>
+// {
+//     x.TokenValidationParameters = new TokenValidationParameters
+//     {
+//         ValidIssuer = config["wtSettings: Issuer"],
+//         ValidAudience = config["JwtSettings:Audience"],
+//         IssuerSigningKey = new SymmetricSecurityKey
+//             (Encoding.UTF8.GetBytes(config["JwtSettings:Key"]!)),
+//         ValidateIssuer = true,
+//         ValidateLifetime = true,
+//         ValidateIssuerSigningKey = true
+//     };
+// });
 
 builder.Services.AddAuthorization();
 
-var env = builder.Environment;
+// var env = builder.Environment;
 
-builder.Configuration
-    .SetBasePath(env.ContentRootPath)
-    .AddJsonFile("appsettings.json", optional: false)
-    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+// builder.Configuration
+//     .SetBasePath(env.ContentRootPath)
+//     .AddJsonFile("appsettings.json", optional: false)
+//     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
 var app = builder.Build();
 
