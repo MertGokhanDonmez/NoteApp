@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NoteApp.Entities.Concrete;
 
 namespace NoteApp.DataAccess;
 
-public class Context : DbContext
+public class Context : IdentityDbContext<AppUser, AppRole, int>
 { 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -12,7 +13,6 @@ public class Context : DbContext
 
     public DbSet<Note> Notes { get; set; }
     public DbSet<Tag> Tags { get; set; }
-    public DbSet<User> Users { get; set; }
     public DbSet<NoteTag> NoteTags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

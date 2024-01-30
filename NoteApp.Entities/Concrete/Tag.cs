@@ -7,6 +7,6 @@ public class Tag : IEntity
     public int TagId { get; set; }
     public string Name { get; set; }
     public int UserId { get; set; }
-    public User User { get; set; }
+    public AppUser User { get; set; }
     public ICollection<NoteTag> NoteTags { get; set; } = new List<NoteTag>();
 }

@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NoteApp.DataAccess;
+using NoteApp.Entities.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -11,25 +13,36 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<Context>();
 
+#region jwt configuration
 // jwt configuration / Authentication - Authorization
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = config["TokenOptions:Issuer"],
-            ValidAudience = config["TokenOptions:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey
-                (Encoding.UTF8.GetBytes(config["TokenOptions:Key"]!))
-            
-        };
-    });
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidateLifetime = true,
+//             ValidateIssuerSigningKey = true,
+//             ValidIssuer = config["TokenOptions:Issuer"],
+//             ValidAudience = config["TokenOptions:Audience"],
+//             IssuerSigningKey = new SymmetricSecurityKey
+//                 (Encoding.UTF8.GetBytes(config["TokenOptions:Key"]!))
 
-builder.Services.AddAuthorization();
+//         };
+//     });
+
+// builder.Services.AddAuthorization();
+#endregion
 
 // environment configuration
 var env = builder.Environment;

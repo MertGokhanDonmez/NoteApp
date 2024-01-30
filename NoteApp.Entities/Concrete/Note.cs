@@ -9,6 +9,6 @@ public class Note : IEntity
     public string Title { get; set; }
     public string Content { get; set; }
     public int UserId { get; set; }
-    public User User { get; set; }
+    public AppUser User { get; set; }
     public ICollection<NoteTag> NoteTags { get; set; }
 }
