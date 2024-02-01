@@ -8,7 +8,7 @@ public class Context : IdentityDbContext<AppUser, AppRole, int>
 { 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost; Database=NoteProjectDb; user id=sa; password=538647MgD*; TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("your connection string");
     }
 
     public DbSet<Note> Notes { get; set; }
